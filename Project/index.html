@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            border: 0px solid;
+            padding: 7% 1%;
+            text-align: center;
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: 6px 6px 12px #b5b5b5,
+                -6px -6px 12px #ffffff;
+        }
+
+        #qoute {
+            font-size: 39px;
+            font-family: cursive;
+        }
+
+        #author {
+            font-family: cursive;
+        }
+
+        #controls {
+            margin: 25px auto;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        #controls button {
+            height: 30px;
+            width: 100px;
+            border-radius: 39px;
+            /* background: #e0e0e0; */
+            box-shadow: 5px 5px 10px #898989,
+                -5px -5px 10px #ffffff;
+            border: 0;
+            outline: none;
+            margin-top: 20px;
+        }
+
+        #controls input {
+            height: 40px;
+            width: 200px;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            background-color: #d6ecf3;
+            padding: 0 10px 0 10px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="controls">
+        <input name="qoute" type="text" placeholder="Enter qoute here" />
+        <input name="author" type="text" placeholder="Enter author here" />
+        <button id="btnBackground">Background</button>
+        <button id="btnDownload">Download</button>
+    </div>
+    <div id="app">
+        <h2 id="qoute">Stay hungry stay foolish</h2>
+        <p id="author">Steve Jobs</p>
+    </div>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script>
+        let app = document.getElementById('app');
+        let btnDownload = document.getElementById('btnDownload');
+        let qouteText = document.getElementById('qoute');
+        let authorText = document.getElementById('author')
+
+        let qouteInput = document.querySelector("[name=qoute]");
+        let authorInput = document.querySelector("[name=author]");
+
+        let btnBackground = document.getElementById('btnBackground');
+
+        let colors = ["#FF5733", "#33FF57", "#336BFF", "#FF33C7", "#33FFC7", "#FF5733", "#FFC733", "#33FFA8", "#A833FF", "#FF3333", "#fff"]
+
+        btnBackground.addEventListener('click', function (e) {
+            let index = Math.floor(Math.random() * colors.length);
+            console.log(index, 'index')
+            let randomColor = colors[index];
+            console.log(randomColor, 'random')
+            app.style.backgroundColor = randomColor;
+        });
+        qouteInput.addEventListener('keyup', function (e) {
+            qouteText.innerText = e.target.value;
+        })
+
+        authorInput.addEventListener('keyup', function (e) {
+            authorText.innerText = e.target.value;
+        })
+        btnDownload.addEventListener('click', function () {
+            html2canvas(app).then(canvas => {
+                let a = document.createElement('a');
+                a.download = Math.floor(Math.random() * 50) + '.png';
+                a.href = canvas.toDataURL();
+                a.click();
+            });
+        })
+
+    </script>
+
+</body>
+
+</html>
